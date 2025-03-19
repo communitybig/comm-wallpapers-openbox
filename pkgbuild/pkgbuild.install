@@ -1,5 +1,29 @@
-# Installation file for Arch Linux packages
-# This file contains scripts that are executed at different stages of package installation/upgrade/removal
+#!/usr/bin/env bash
+# -*- coding: utf-8 -*-
+
+export TERM=${TERM:-xterm}
+export TERM=${TERM:-xterm-256color}
+
+# Defining color variables (bold only)
+export black="\033[1;30m"
+export red="\033[1;31m"
+export green="\033[1;32m"
+export yellow="\033[1;33m"
+export blue="\033[1;34m"
+export magenta="\033[1;35m"
+export cyan="\033[1;36m"
+export white="\033[1;37m"
+
+# Setting variables for bold and reset
+export bold="\033[1m"
+export reset="\033[0m"
+export pkgname=comm-wallpapers-openbox
+
+msg() {
+	local msg="$1"
+	echo -e "${green}==>[$pkgname] ${bold}${yellow}${msg}${reset}" >&2
+}
+
 
 # Function executed before package installation
 # pre_install() {
@@ -52,11 +76,7 @@
 # }
 
 # Function executed after package removal
-# post_remove() {
-#     echo "Cleaning up after package removal..."
-    # Example: Remove data directories created by the package
-    # rm -rf /var/lib/mypackage
-
-#     echo "If you want to remove all user data, run:"
-#     echo "rm -rf /home/*/mypackage_data"
-# }
+post_remove() {
+    msg "Removing files ..."
+    rm -f /usr/share/backgrounds/community/ob_*.jpg
+}
